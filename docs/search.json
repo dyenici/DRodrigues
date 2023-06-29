@@ -1,0 +1,16 @@
+[
+  {
+    "objectID": "about.html",
+    "href": "about.html",
+    "title": "About",
+    "section": "",
+    "text": "About this site\n\n1 + 1\n\n[1] 2"
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Olá, seja bem vindo ao meu Projeto Final!",
+    "section": "",
+    "text": "Ei, que bom te ver por aqui. Você já sabe quem eu sou pelo outro site, e caso não saiba, é só clicar aqui. Agora tenho uma nova proposta. Reunindo tudo que aprendi ao longo da disciplina de Análise e Visualização de Dados, o desafio é trabalhar sozinha um conjunto de dados, desde a exploração até a definição do melhor modelo a ser aplicado. Esses são meus primeiros passos sozinha no R Studio, um desafio e tanto não é?! Mas como desistir não é uma opção, vou tentar mostrar para vocês o meu trabalho da melhor maneira possível. Espero que seja proveitoso para você que resolveu estar aqui, da mesma forma que foi e está sendo para mim. Obrigada pela sua visita!"
+  }
+]

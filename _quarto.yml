@@ -1,0 +1,44 @@
+project:
+  type: website
+  output-dir: docs
+   
+execute:
+  cache: true
+  freeze: auto
+  warning: false
+
+website:
+  title: "Projeto Final"
+  navbar:
+    left:
+      - href: index.qmd
+        text: Home
+      
+    right:
+       - icon: linkedin
+         href: https://br.linkedin.com/in/dy%C3%AAnici-rodrigues-30ba6a241
+       - icon: instagram
+         menu: 
+            - text: Dyênici Rodrigues
+              url: https://www.instagram.com/dyenici/
+            - text: Emerson M. Del Ponte
+              url: https://www.instagram.com/emdelponte/
+            - text: Fitopatolofia UFV
+              url: https://www.instagram.com/fitopatologiaufv/
+       - icon: youtube
+         href: https://www.youtube.com/edelponte
+       - icon: github
+         menu:
+            - text: Dyênici Rodrigues
+              url: https://github.com/dyenici
+            - text: Emerson M. Del Ponte
+              url: https://github.com/emdelponte
+
+format:
+  html:
+    theme: lux
+    css: styles.css
+    toc: true
+
+editor: visual
+
