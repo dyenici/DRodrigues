@@ -16,8 +16,8 @@ website:
     logo: logo2.gif
     
     left:
-      - href: index.qmd
-        text: Home
+      - href: resumo.qmd
+        text: Sobre o projeto
       
     right:
        - icon: linkedin
