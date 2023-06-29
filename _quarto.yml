@@ -9,7 +9,7 @@ execute:
 
 website:
   title: "Projeto Final"
-  favicon: logo.png
+  favicon: logo3.png
   
   navbar:
     pinned: true
