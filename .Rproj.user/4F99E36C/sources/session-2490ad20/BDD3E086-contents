@@ -1,0 +1,111 @@
+---
+title: "Dados da Dyênici"
+format: html
+---
+
+```{r}
+library(tidyverse)
+library(readxl)
+
+dados <- read_excel("dados-dyenici.xlsx", "Dados")
+
+#distribuição da variavel resposta escala
+dados |> 
+  ggplot(aes(escala))+
+  geom_histogram(bins = 7  , fill= 'black')+
+  theme_classic()
+
+dados2 <- aov(escala~material+repetição,
+              data= dados)
+
+summary(dados2)
+
+library(performance)
+check_heteroscedasticity(dados2)
+check_normality(dados2)
+
+library(DHARMa)
+plot(simulateResiduals(dados2))
+
+dados2 |> 
+  ggplot(aes(x=material,
+             y=escala)) +
+  geom_boxplot(outlier.color = NA,
+               fill = "grey",
+               size = 0.7,
+               width = 0.5) +
+  geom_jitter(width = 0.3,
+              height = 0,
+              size = 1,
+              color = "black")+
+  labs(title= "Escala de Notas de Taylor e Sasser (1978)", 
+       x= "Genótipos", y= "Notas")
+
+#ggsave('teste.png', height = 10, width = 15)
+
+library(ExpDes.pt)
+
+dbc(dados$material,
+    dados$repetição,
+    dados$escala,
+    mcomp= "sk")
+
+```
+
+```{r}
+dados |> 
+  ggplot(aes(fator))+
+  geom_histogram(fill='black', bins = 7)
+
+dados3<- aov(fator~material+repetição,
+              data= dados)
+
+summary(dados3)
+
+library(performance)
+check_heteroscedasticity(dados3)
+check_normality(dados3)
+
+library(DHARMa)
+plot(simulateResiduals(dados3))
+
+library(MASS)
+b <- boxcox (lm(dados$fator+0.1 ~ 1))
+
+lambda <- b$x[which.max(b$y)]
+lambda
+```
+
+```{r}
+dados4 <- dados |> 
+  mutate(fatort=log(fator))
+
+dados4 |> 
+  ggplot(aes(fatort))+
+  geom_histogram(bins = 7  , fill= 'black')+
+  theme_classic()
+
+dados5 <- aov(fatort ~material+repetição,
+              data = dados4)
+
+summary(dados5)
+
+library(performance)
+check_heteroscedasticity(dados5)
+check_normality(dados5)
+
+library(DHARMa)
+plot(simulateResiduals(dados5))
+
+dbc(dados4$material,
+    dados4$repetição,
+    dados4$fatort,
+    mcomp= "sk")
+
+dados4 |> 
+  ggplot(aes(fatort))+
+  geom_histogram(bins = 7  , fill= 'black')+
+  theme_classic()
+
+```
+

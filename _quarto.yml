@@ -9,7 +9,12 @@ execute:
 
 website:
   title: "Projeto Final"
+  favicon: logo.png
+  
   navbar:
+    pinned: true
+    logo: logo2.gif
+    
     left:
       - href: index.qmd
         text: Home
@@ -36,7 +41,9 @@ website:
 
 format:
   html:
-    theme: lux
+    theme:
+      light: flatly
+      dark: darkly
     css: styles.css
     toc: true
 

@@ -1,8 +1,11 @@
 ---
 title: "Olá, seja bem vindo ao meu Projeto Final!"
+about:
+  template: jolla
+  id: about-block
+  image: "Foto.jpg"
+  image-shape: round
 ---
-
-![](Foto.jpg){fig-align="center" width="214"}
 
 |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
 |:----------------------------------------------------------------------:|
