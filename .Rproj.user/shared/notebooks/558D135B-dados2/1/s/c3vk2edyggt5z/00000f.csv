@@ -1,0 +1,5 @@
+"0","as.tibble(dados7)
+"
+"2","Warning: `as.tibble()` was deprecated in tibble 2.0.0.
+Please use `as_tibble()` instead.
+The signature and semantics have changed, see `?as_tibble`."

@@ -18,6 +18,12 @@ website:
     left:
       - href: resumo.qmd
         text: Sobre o projeto
+      - text: Análise dos Dados
+        menu: 
+          - href: dados.qmd
+            text: Análise Contagem de Galhas (Escala de Notas)
+          - href: dados2.qmd
+            text: Análise Fator de Reprodução
       
     right:
        - icon: linkedin

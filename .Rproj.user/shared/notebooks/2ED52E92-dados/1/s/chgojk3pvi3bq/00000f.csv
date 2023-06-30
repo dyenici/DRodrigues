@@ -1,0 +1,12 @@
+"0","library(ExpDes.pt)"
+"0",""
+"0","dbc(dados$material,"
+"0","    dados$repetição,"
+"0","    dados$escala,"
+"0","    mcomp= ""sk"")"
+"2","Warning: Unknown or uninitialised column: `material`."
+"2","Warning: Unknown or uninitialised column: `repetição`."
+"2","Warning: Unknown or uninitialised column: `escala`."
+"2","Error in model.frame.default(formula = resp ~ Trat + Bloco, drop.unused.levels = TRUE) : 
+  tipo inválido (NULL) para variável 'resp'
+"

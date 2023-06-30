@@ -1,0 +1,8 @@
+"0","dados2 <- read_excel(""dados-dyenici.xlsx"", ""Dados"")"
+"0",""
+"0","dados2 |> "
+"0","  ggplot(aes(escala))+"
+"0","  geom_histogram(bins = 10  , "
+"0","                 fill= 'lightblue',"
+"0","                 color= ""black"")+"
+"0","  theme_classic()"

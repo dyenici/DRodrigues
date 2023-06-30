@@ -1,0 +1,118 @@
+---
+title: "Análise Fator de Reprodução"
+format: html
+---
+
+```{r}
+library(tidyverse)
+library(readxl)
+
+dados2 <- read_excel("dados-dyenici.xlsx", "Dados")
+
+dados2 |> 
+  ggplot(aes(fator))+
+  geom_histogram(bins = 10  , 
+                 fill= 'lightgreen',
+                 color= "black")+
+  theme_classic()
+```
+
+## Checando as premissas
+
+```{r}
+dados3 <- aov(fator~material+repetição,
+              data= dados2)
+
+summary(dados3)
+
+library(performance)
+check_heteroscedasticity(dados3)
+check_normality(dados3)
+
+library(DHARMa)
+plot(simulateResiduals(dados3))
+```
+
+## Transformação Box Cox
+
+```{r}
+library(MASS)
+b <- boxcox (lm(dados2$fator+0.1 ~ 1))
+
+lambda <- b$x[which.max(b$y)]
+lambda
+```
+
+```{r}
+dados4 <- dados2 |> 
+  mutate(fatort=log(fator))
+
+dados4 |> 
+  ggplot(aes(fatort))+
+  geom_histogram(bbins = 10  , 
+                 fill= 'orange',
+                 color= "black")+
+  theme_classic()
+```
+
+## Checando novamente as premissas
+
+```{r}
+dados5 <- aov(fatort ~material+repetição,
+              data = dados4)
+
+summary(dados5)
+
+library(performance)
+check_heteroscedasticity(dados5)
+check_normality(dados5)
+
+library(DHARMa)
+plot(simulateResiduals(dados5))
+```
+
+## Teste de Scott Knott
+
+```{r}
+library(ExpDes.pt)
+
+dbc(dados4$material,
+    dados4$repetição,
+    dados4$fatort,
+    mcomp= "sk")
+```
+
+## Critérios de Moura e Regis (1987)
+
+```{r}
+dados6 <- read_excel("dados2.xlsx", "rfr")
+
+dados6 |> 
+  ggplot(aes(x=materiais,
+             y=rfr*100)) +
+  geom_col(fill= "orange",
+           color="black" )+
+  ylim(0,100)+
+  labs(title= "Critérios de Moura e Regis (1987)", 
+       x= "Genótipos", y= "Redução no Fator de Reprodução (%)")
+
+```
+
+## Teste de Duncan
+
+```{r}
+dbc(dados4$material,
+    dados4$repetição,
+    dados4$fatort,
+    mcomp= "duncan")
+```
+
+## Análise Final dos Dados
+
+```{r}
+
+dados7 <- read_excel("dados3.xlsx")
+
+as.tibble(dados7)
+
+```

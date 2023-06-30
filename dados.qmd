@@ -1,0 +1,99 @@
+---
+title: "Análise Contagem de Galhas (Escala de Notas)"
+format: html
+---
+
+```{r}
+warning(FALSE)
+
+library(tidyverse)
+library(readxl)
+
+dados <- read_excel("dados.xlsx")
+as.tibble(dados)
+
+```
+
+## Análise - Escala de Notas
+
+```{r}
+dados2 <- read_excel("dados-dyenici.xlsx", "Dados")
+
+dados2 |> 
+  ggplot(aes(escala))+
+  geom_histogram(bins = 10  , 
+                 fill= 'lightblue',
+                 color= "black")+
+  theme_classic()
+```
+
+## Checando as premissas
+
+```{r}
+dados3 <- aov(escala~material+repetição,
+              data= dados2)
+
+summary(dados3)
+
+library(performance)
+check_heteroscedasticity(dados3)
+check_normality(dados3)
+
+library(DHARMa)
+plot(simulateResiduals(dados3))
+  
+```
+
+```{r}
+dados2 |> 
+  ggplot(aes(x=material,
+             y=escala)) +
+  geom_boxplot(outlier.color = NA,
+               fill = "lightgreen",
+               size = 0.7,
+               width = 0.5) +
+  geom_jitter(width = 0.3,
+              height = 0,
+              size = 1,
+              color = "black")+
+  labs(title= "Escala de Notas de Taylor e Sasser (1978)", 
+       x= "Genótipos", y= "Notas")+
+  ylim(0,5)
+```
+
+## Teste de Scott Knott
+
+```{r}
+library(ExpDes.pt)
+
+dbc(dados2$material,
+    dados2$repetição,
+    dados2$escala,
+    mcomp= "sk")
+```
+
+## Escala de Taylor e Sasser (1978)
+
+Segundo escala de Taylor e Sasser (1978), sistemas radiculares de plantas com notas inferiores a 2 (número de galhas \< 10) são consideradas resistentes, e com notas maiores que 2 (número de galhas \> 10) consideradas suscetíveis.
+
+```{r}
+dados4 <- read_excel("dados2.xlsx", "escala")
+
+dados4 |> 
+  ggplot(aes(x=materiais,
+             y=escala)) +
+  geom_col(fill= "lightblue",
+           color="black" )+
+  ylim(0,5)+
+  labs(title= "Escala de Notas de Taylor e Sasser (1978)", 
+       x= "Genótipos", y= "Notas")
+```
+
+## Teste de Duncan
+
+```{r}
+dbc(dados2$material,
+    dados2$repetição,
+    dados2$escala,
+    mcomp= "duncan")
+```
